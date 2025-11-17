@@ -1,0 +1,437 @@
+<!-- Top Navigation Bar -->
+    <header class="sticky-top shadow-lg bg-light-subtle z-30">
+      <nav class="container d-flex justify-content-between align-items-center" style="height: 64px;">
+        <div class="d-flex align-items-center cursor-pointer" (click)="setActiveSection('home')">
+          <svg class="w-8 h-8 text-primary" width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354l-4.132 4.132M12 4.354a5 5 0 010 7.072M12 4.354L19.132 11.486M12 4.354a5 5 0 000 7.072m0 0l-4.132-4.132m0 0l-4.132 4.132m4.132-4.132a5 5 0 010 7.072m0 0l4.132-4.132m-4.132 4.132a5 5 0 000 7.072"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+          <span class="h5 fw-bold text-dark ms-2">Amazement Co. Education</span>
+        </div>
+        
+        <!-- Desktop Menu -->
+        <div class="d-none d-md-flex space-x-3">
+          @for (section of sections(); track section) {
+            <!-- {{ section.id }} -->
+          
+            <button 
+              (click)="setActiveSection(section)"
+              class="btn btn-sm px-3 py-2 rounded-3 transition-colors"
+              [class]="activeSection() === section.id ? 'btn-outline-primary active-link fw-bold' : 'btn-link text-secondary-emphasis hover-primary'"              
+            >
+              {{ section.name }}
+            </button>
+          }
+            <!-- @for (section of sections(); track section) {
+            <button
+              (click)="setActiveSection(section)"
+              class="btn btn-sm px-3 py-2 rounded-3 transition-colors"
+              [class]="activeSection() === section.id ? 'btn-outline-primary active-link fw-bold' : 'btn-link text-secondary-emphasis hover-primary'"
+            >
+              {{ section.names }}
+            </button>
+          } -->
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button (click)="isMobileMenuOpen.set(!isMobileMenuOpen())" class="btn btn-light d-md-none p-2 rounded-2">
+          <svg class="w-6 h-6" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </nav>
+      
+      <!-- Mobile Menu (Dropdown) -->
+      <!-- @if (isMobileMenuOpen()) {
+        <div class="d-md-none bg-white border-top border-light shadow-sm">
+          @for (section of sections(); track section) {
+            <button
+              (click)="setActiveSection(section.id); isMobileMenuOpen.set(false)"
+              class="dropdown-item px-4 py-2"
+              [class]="activeSection() === section.id ? 'bg-primary-subtle text-primary fw-bold' : 'text-dark'"
+            >
+              {{ section.name }}
+            </button>
+          }
+        </div>
+      } -->
+    </header>
+
+    <main class="bg-light min-vh-100">
+      
+      <!-- Home Section -->
+      @if (activeSection() === 'home') {
+        <section class="home-section">
+          <!-- Hero Banner/Carousel Placeholder -->
+          <div class="position-relative hero-banner d-flex align-items-center justify-content-center text-center p-4 shadow-sm"
+               style="background-image: url('https://placehold.co/1200x800/0d6efd/ffffff?text=STUDY+MBBS+ABROAD');">
+            <div class="hero-overlay"></div>
+            <div class="position-relative container">
+              <h1 class="display-4 fw-bolder text-white mb-4 animate-pulse-slow">
+                Study MBBS in Georgia & Russia with Hostel & Halal Food Facilities
+              </h1>
+              <p class="h5 text-light mb-5 mx-auto" style="max-width: 700px;">
+                Your safe, affordable, and accredited path to becoming a doctor starts here. Full support from admission to graduation.
+              </p>
+              <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                <button (click)="setActiveSection('admission')" class="btn cta-button btn-warning btn-lg fw-bold">
+                  <span>Apply Now</span>
+                  <svg class="w-5 h-5 ms-2" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </button>
+                <button (click)="openCounselingLink()" class="btn cta-button btn-outline-light btn-lg fw-bold border-2">
+                  <span>Book Counseling Call</span>
+                  <svg class="w-5 h-5 ms-2" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.128a11.042 11.042 0 005.516 5.516l1.128-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-11a2 2 0 01-2-2v-14z"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Highlights Section -->
+          <div class="py-5 py-md-5 bg-white">
+            <div class="container">
+              <h2 class="section-title text-center mb-5">Why Choose Us? Your Safe Path to MBBS</h2>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                @for (feature of keyHighlights; track feature.title) {
+                  <div class="col">
+                    <div class="card p-4 rounded-3 shadow-sm h-100 highlight-card">
+                      <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3" style="width: 48px; height: 48px;">
+                        <span class="fs-4 fw-bold">{{ feature.icon }}</span>
+                      </div>
+                      <h3 class="h5 fw-bold text-dark mb-2">{{ feature.title }}</h3>
+                      <p class="text-muted">{{ feature.description }}</p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      <!-- About Us Section -->
+      @if (activeSection() === 'about') {
+        <section class="py-5 py-md-5 container">
+          <h2 class="section-title text-center mb-5">About Amazement Co. Education Division</h2>
+          <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+              <p class="lead text-secondary mb-4">
+                Amazement Co. is dedicated to bridging the gap between aspiring medical students and world-class educational opportunities. Our Education Division specializes in providing comprehensive, end-to-end support for students from India, Pakistan, the Middle East, and Africa aiming to pursue MBBS degrees in reputable universities in Georgia and Russia.
+              </p>
+              <h3 class="h4 fw-bold text-primary mb-3">Our Vision</h3>
+              <blockquote class="border-start border-4 border-warning ps-4 py-2 fst-italic fs-5 text-dark bg-light p-3 rounded-2 shadow-sm">
+                "Bringing quality medical education closer to students by ensuring safety, affordability, and complete pastoral care."
+              </blockquote>
+            </div>
+            <div class="col-lg-6">
+              <div class="rounded-3 overflow-hidden shadow-lg">
+                <img src="https://placehold.co/600x400/0d6efd/ffffff?text=Our+Team" alt="Amazement Co. Team" class="w-100 h-auto object-fit-cover hover-opacity-90">
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-5 pt-4 border-top border-light-subtle">
+            <h3 class="h4 fw-bold text-dark mb-4">Accreditation & Partnerships</h3>
+            <p class="text-secondary">We partner exclusively with universities that are recognized by major international bodies, including the Medical Council of India (MCI) / National Medical Commission (NMC), World Directory of Medical Schools (WDMS), and local governmental accreditation bodies in Georgia and Russia. This ensures your degree is globally valid.</p>
+          </div>
+        </section>
+      }
+
+      <!-- Study Destinations Section -->
+      @if (activeSection() === 'destinations') {
+        <section class="py-5 py-md-5 container">
+          <h2 class="section-title text-center mb-5">Study Destinations: MBBS in Georgia & Russia 🩺</h2>
+          
+          <!-- Destination Tabs -->
+          <ul class="nav nav-tabs mb-4">
+            <li class="nav-item">
+              <button 
+                (click)="activeCountry.set('georgia')" 
+                class="nav-link"
+                [class]="activeCountry() === 'georgia' ? 'active fw-bold' : 'text-secondary'">
+                MBBS in Georgia
+              </button>
+            </li>
+            <li class="nav-item">
+              <button 
+                (click)="activeCountry.set('russia')" 
+                class="nav-link"
+                [class]="activeCountry() === 'russia' ? 'active fw-bold' : 'text-secondary'">
+                MBBS in Russia
+              </button>
+            </li>
+          </ul>
+
+          <!-- Georgia Content -->
+          @if (activeCountry() === 'georgia') {
+            <div class="space-y-4">
+              <h3 class="h3 fw-bold text-primary mb-4">Georgia: European Quality Education</h3>
+              @for (uni of georgiaUniversities; track uni.name) {
+                <div class="card uni-card p-4 rounded-3 shadow-sm border-start border-5 border-warning-subtle">
+                  <h4 class="h5 fw-bold text-dark mb-2">{{ uni.name }}</h4>
+                  <p class="text-primary mb-3 fw-medium">{{ uni.location }} | Duration: {{ uni.duration }}</p>
+                  <p class="text-secondary mb-4">{{ uni.description }}</p>
+                  <div class="row row-cols-1 row-cols-sm-3 g-3 small fw-medium">
+                    <div class="col">
+                      <div class="p-3 bg-white border rounded-3 shadow-sm">💰 **Tuition Fee:** {{ uni.tuitionFee }}</div>
+                    </div>
+                    <div class="col">
+                      <div class="p-3 bg-white border rounded-3 shadow-sm">✅ **Eligibility:** {{ uni.eligibility }}</div>
+                    </div>
+                    <div class="col">
+                      <div class="p-3 bg-white border rounded-3 shadow-sm">🏠 **Hostel & Food:** Included (Halal Options)</div>
+                    </div>
+                  </div>
+                </div>
+              }
+              <p class="lead text-secondary pt-3">Georgia is a growing hub for international medical students, offering a high standard of living and competitive fees. Full details on visa and support are available upon counseling.</p>
+            </div>
+          }
+
+          <!-- Russia Content -->
+          @if (activeCountry() === 'russia') {
+            <div class="space-y-4">
+              <h3 class="h3 fw-bold text-primary mb-4">Russia: Globally Recognized Degrees</h3>
+              @for (uni of russiaUniversities; track uni.name) {
+                <div class="card uni-card p-4 rounded-3 shadow-sm border-start border-5 border-warning-subtle">
+                  <h4 class="h5 fw-bold text-dark mb-2">{{ uni.name }}</h4>
+                  <p class="text-primary mb-3 fw-medium">{{ uni.location }} | Duration: {{ uni.duration }}</p>
+                  <p class="text-secondary mb-4">{{ uni.description }}</p>
+                  <div class="row row-cols-1 row-cols-sm-3 g-3 small fw-medium">
+                    <div class="col">
+                      <div class="p-3 bg-white border rounded-3 shadow-sm">💰 **Tuition Fee:** {{ uni.tuitionFee }}</div>
+                    </div>
+                    <div class="col">
+                      <div class="p-3 bg-white border rounded-3 shadow-sm">✅ **Eligibility:** {{ uni.eligibility }}</div>
+                    </div>
+                    <div class="col">
+                      <div class="p-3 bg-white border rounded-3 shadow-sm">🏘️ **Lifestyle:** Affordable & Diverse</div>
+                    </div>
+                  </div>
+                </div>
+              }
+              <p class="lead text-secondary pt-3">Russia boasts some of the oldest and most prestigious medical institutions in the world, with degrees recognized worldwide. We ensure a seamless transition and cultural integration for all students.</p>
+            </div>
+          }
+        </section>
+      }
+
+      <!-- Hostel Accommodation Section -->
+      @if (activeSection() === 'hostel') {
+        <section class="py-5 py-md-5 container">
+          <h2 class="section-title text-center mb-5">Guaranteed Safe & Comfortable Hostel Accommodation</h2>
+          
+          <div class="row g-5">
+            <!-- Facilities List -->
+            <div class="col-md-6">
+              <div class="bg-white p-4 p-md-5 rounded-3 shadow-lg border-start border-5 border-primary">
+                <h3 class="h4 fw-bold text-dark mb-4">Hostel Facilities at a Glance</h3>
+                <ul class="list-unstyled space-y-3 text-secondary">
+                  @for (facility of hostelFacilities; track facility) {
+                    <li class="d-flex align-items-start">
+                      <svg class="flex-shrink-0 me-3 text-success" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                      <span>{{ facility }}</span>
+                    </li>
+                  }
+                  <li class="d-flex align-items-start fw-bold text-danger">
+                    <svg class="flex-shrink-0 me-3 text-danger" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>**24x7 Indian/Halal Food Options Provided**</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Image Gallery Placeholder -->
+            <div class="col-md-6">
+              <div class="space-y-3">
+                <h3 class="h4 fw-bold text-dark mb-3">Hostel Views (Separate for Boys & Girls)</h3>
+                <div class="row row-cols-2 g-3">
+                  <div class="col">
+                    <img src="https://placehold.co/300x200/4c4c4c/ffffff?text=BOYS+HOSTEL" alt="Boys Hostel Room" class="img-fluid rounded-3 shadow-sm object-fit-cover" style="height: 150px;">
+                  </div>
+                  <div class="col">
+                    <img src="https://placehold.co/300x200/9ca3af/ffffff?text=GIRLS+HOSTEL" alt="Girls Hostel Room" class="img-fluid rounded-3 shadow-sm object-fit-cover" style="height: 150px;">
+                  </div>
+                  <div class="col">
+                    <img src="https://placehold.co/300x200/374151/ffffff?text=DINING+HALL" alt="Dining Hall" class="img-fluid rounded-3 shadow-sm object-fit-cover" style="height: 150px;">
+                  </div>
+                  <div class="col">
+                    <img src="https://placehold.co/300x200/1f2937/ffffff?text=STUDY+AREA" alt="Study Area" class="img-fluid rounded-3 shadow-sm object-fit-cover" style="height: 150px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonials -->
+          <div class="mt-5 pt-4 border-top border-light-subtle">
+            <h3 class="h4 fw-bold text-dark mb-4 text-center">Student Testimonials</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              @for (testimonial of studentTestimonials; track testimonial.name) {
+                <div class="col">
+                  <div class="card bg-white p-4 rounded-3 shadow-lg testimonial-card">
+                    <p class="fst-italic text-secondary mb-3">"{{ testimonial.quote }}"</p>
+                    <p class="fw-bold text-primary mb-0">- {{ testimonial.name }}</p>
+                    <p class="small text-muted">{{ testimonial.country }} | {{ testimonial.university }}</p>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </section>
+      }
+
+      <!-- Admission Process Section -->
+      @if (activeSection() === 'admission') {
+        <section class="py-5 py-md-5 container">
+          <h2 class="section-title text-center mb-5">Your 6-Step Admission Journey</h2>
+          
+          <div class="row g-5">
+            <!-- Step-by-Step Guide -->
+            <div class="col-lg-8 space-y-4">
+              @for (step of admissionSteps; track step.title) {
+                <div class="d-flex align-items-start gap-3 bg-white p-4 rounded-3 shadow-sm step-card">
+                  <div class="fs-4 fw-bolder text-white bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 40px; height: 40px;">
+                    {{ $index + 1 }}
+                  </div>
+                  <div>
+                    <h3 class="h5 fw-bold text-dark mb-1">{{ step.title }}</h3>
+                    <p class="text-secondary">{{ step.description }}</p>
+                  </div>
+                </div>
+              }
+            </div>
+            
+            <!-- Lead Collection Form -->
+            <div class="col-lg-4">
+              <div class="bg-white p-4 p-md-5 rounded-3 shadow-lg border-top border-5 border-warning">
+                <h3 class="h5 fw-bold text-dark mb-4 text-center">Quick Apply / Get Free Counseling</h3>
+                <form (submit)="submitLeadForm($event)" class="space-y-3">
+                  <div class="mb-3">
+                    <label for="name" class="form-label small fw-medium">Full Name</label>
+                    <input type="text" id="name" name="name" [(ngModel)]="leadForm.name" required class="form-control rounded-3">
+                  </div>
+                  <div class="mb-3">
+                    <label for="country" class="form-label small fw-medium">Country of Residence</label>
+                    <input type="text" id="country" name="country" [(ngModel)]="leadForm.country" required class="form-control rounded-3">
+                  </div>
+                  <div class="mb-3">
+                    <label for="whatsapp" class="form-label small fw-medium">WhatsApp Number</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" [(ngModel)]="leadForm.whatsapp" required class="form-control rounded-3">
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label small fw-medium">Email Address</label>
+                    <input type="email" id="email" name="email" [(ngModel)]="leadForm.email" required class="form-control rounded-3">
+                  </div>
+                  <div class="mb-3">
+                    <label for="interestedCountry" class="form-label small fw-medium">Interested Country</label>
+                    <select id="interestedCountry" name="interestedCountry" [(ngModel)]="leadForm.interestedCountry" required class="form-select rounded-3">
+                      <option value="">Select Option</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Russia">Russia</option>
+                      <option value="Both">Both</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary cta-button w-100 fw-bold mt-4">
+                    Submit Application
+                  </button>
+                </form>
+                @if (formMessage()) {
+                  <p [class]="formMessageClass()" class="mt-4 p-3 rounded-3 text-center fw-medium">{{ formMessage() }}</p>
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      <!-- Gallery / Student Life Section -->
+      @if (activeSection() === 'gallery') {
+        <section class="py-5 py-md-5 container">
+          <h2 class="section-title text-center mb-5">Student Life & Visual Gallery</h2>
+          <p class="text-center lead text-secondary mb-5">See for yourself what life is like studying MBBS with full support.</p>
+          
+          <div class="row row-cols-2 row-cols-md-4 g-4">
+            @for (item of galleryImages; track item.alt) {
+              <div class="col">
+                <div class="rounded-3 overflow-hidden shadow-sm gallery-item cursor-pointer">
+                  <img [src]="item.src" [alt]="item.alt" class="w-100 object-fit-cover" style="height: 192px;">
+                  <div class="p-3 bg-white small fw-medium text-dark text-center">{{ item.alt }}</div>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      <!-- Contact Us Section -->
+      @if (activeSection() === 'contact') {
+        <section class="py-5 py-md-5 container">
+          <h2 class="section-title text-center mb-5">Get in Touch with Our Experts</h2>
+          
+          <div class="row g-5">
+            <!-- Contact Information -->
+            <div class="col-md-6 space-y-4">
+              <div class="d-flex align-items-center gap-3">
+                <svg class="text-primary flex-shrink-0" width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <div>
+                  <p class="fw-bold text-dark mb-0">WhatsApp & Phone Support</p>
+                  <p class="lead text-secondary mb-0">+91 9876 543210 (India)</p>
+                  <p class="lead text-secondary mb-0">+7 9123 456789 (Russia/Intl)</p>
+                </div>
+              </div>
+              
+              <div class="d-flex align-items-center gap-3">
+                <svg class="text-primary flex-shrink-0" width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <div>
+                  <p class="fw-bold text-dark mb-0">Email Address</p>
+                  <p class="lead text-primary fw-medium mb-0">info@learnandstay.com</p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center gap-3">
+                <svg class="text-primary flex-shrink-0" width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <div>
+                  <p class="fw-bold text-dark mb-0">Head Office</p>
+                  <p class="lead text-secondary mb-0">Amazement Co. Education Division, Dubai, UAE (Global Coordination)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inquiry Form -->
+            <div class="col-md-6">
+              <div class="bg-white p-4 p-md-5 rounded-3 shadow-lg border-top border-5 border-primary">
+                <h3 class="h5 fw-bold text-dark mb-4 text-center">Send Us Your Inquiry</h3>
+                <form (submit)="submitInquiryForm($event)" class="space-y-3">
+                  <div class="mb-3">
+                    <label for="contactName" class="form-label small fw-medium">Name</label>
+                    <input type="text" id="contactName" name="contactName" [(ngModel)]="contactForm.name" required class="form-control rounded-3">
+                  </div>
+                  <div class="mb-3">
+                    <label for="contactEmail" class="form-label small fw-medium">Email</label>
+                    <input type="email" id="contactEmail" name="contactEmail" [(ngModel)]="contactForm.email" required class="form-control rounded-3">
+                  </div>
+                  <div class="mb-3">
+                    <label for="contactMessage" class="form-label small fw-medium">Your Message</label>
+                    <textarea id="contactMessage" name="contactMessage" [(ngModel)]="contactForm.message" rows="4" required class="form-control rounded-3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-warning cta-button w-100 fw-bold mt-4">
+                    Submit Inquiry
+                  </button>
+                </form>
+                @if (inquiryMessage()) {
+                  <p [class]="inquiryMessageClass()" class="mt-4 p-3 rounded-3 text-center fw-medium">{{ inquiryMessage() }}</p>
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container text-center small">
+        <p>&copy; {{ currentYear() }} Amazement Co. Education Division. All Rights Reserved.</p>
+        <p class="mt-1">Safe, Affordable, Accredited MBBS Programs in Georgia and Russia.</p>
+        <!-- <p class="mt-2 text-info">Domain: learnandstay.com</p> -->
+      </div>
+    </footer>
+
+
+    <router-outlet />
