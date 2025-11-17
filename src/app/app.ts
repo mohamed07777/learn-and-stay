@@ -185,7 +185,7 @@ export class App {
    // State Signals
   activeSection = signal<'home' | 'about' | 'destinations' | 'hostel' | 'admission' | 'gallery' | 'contact'>('home');
   activeCountry = signal<'georgia' | 'russia'>('georgia');
-  isMobileMenuOpen = signal(false);
+  isMobileMenuOpen = signal(true);
   
   // Form State Signals
   leadForm = {

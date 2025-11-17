@@ -19,15 +19,6 @@
               {{ section.name }}
             </button>
           }
-            <!-- @for (section of sections(); track section) {
-            <button
-              (click)="setActiveSection(section)"
-              class="btn btn-sm px-3 py-2 rounded-3 transition-colors"
-              [class]="activeSection() === section.id ? 'btn-outline-primary active-link fw-bold' : 'btn-link text-secondary-emphasis hover-primary'"
-            >
-              {{ section.names }}
-            </button>
-          } -->
         </div>
         
         <!-- Mobile Menu Button -->
@@ -37,11 +28,11 @@
       </nav>
       
       <!-- Mobile Menu (Dropdown) -->
-      <!-- @if (isMobileMenuOpen()) {
+      @if (isMobileMenuOpen()) {
         <div class="d-md-none bg-white border-top border-light shadow-sm">
           @for (section of sections(); track section) {
             <button
-              (click)="setActiveSection(section.id); isMobileMenuOpen.set(false)"
+              (click)="setActiveSection(section); isMobileMenuOpen.set(false)"
               class="dropdown-item px-4 py-2"
               [class]="activeSection() === section.id ? 'bg-primary-subtle text-primary fw-bold' : 'text-dark'"
             >
@@ -49,7 +40,7 @@
             </button>
           }
         </div>
-      } -->
+      }
     </header>
 
     <main class="bg-light min-vh-100">
